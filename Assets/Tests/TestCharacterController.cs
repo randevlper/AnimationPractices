@@ -23,20 +23,32 @@ public class TestCharacterController : MonoBehaviour {
 	}
 
 	private void FixedUpdate () {
-		Vector2 dir = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-		animController.SetFloat ("Forward", dir.y);
-		animController.SetFloat ("Direction", dir.x);
-		velocity += gravity;
-		velocity += transform.forward * (dir.y * speed);
+		Vector3 leftStick = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0 , Input.GetAxisRaw ("Vertical"));
+		//Vector2 rightStick = Input.mouseScrollDelta;
 
+		
+
+		Vector3 charDir = (mainCamera.transform.forward * leftStick.z) + (mainCamera.transform.right * leftStick.x);
+		Debug.DrawRay(transform.position + new Vector3(0,2),charDir * 10f);
+
+		//velocity +=  transform.forward * (speed * charDir.magnitude); 
+		velocity = velocity + (charDir.normalized * speed);
+
+
+		velocity += gravity;
+		velocity -= velocity * friction;
+
+
+		animController.SetFloat ("Forward", charDir.magnitude);
+		animController.SetFloat ("Direction", charDir.x);
+		controller.Move (velocity * Time.deltaTime);
+	}
+
+	void Jump () {
 		if (Input.GetButtonDown ("Jump") && controller.isGrounded) {
 			velocity.y += jumpSpeed;
 			animController.SetTrigger ("Jump");
 		}
-		velocity -= velocity * friction;
-
-		transform.Rotate (new Vector3 (0, dir.x, 0) * (rotSpeed * Time.deltaTime));
-		controller.Move (velocity * Time.deltaTime);
 	}
 
 	void CheckIfGrounded () {
