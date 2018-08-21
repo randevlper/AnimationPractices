@@ -3,53 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ThirdPersonV2 : MonoBehaviour {
+	[SerializeField] private CharacterController characterController;
+	private Camera mainCamera;
+	private Animator anim;
+	public float jumpForce = 10;
+	public float friction = 0.1f;
 	public float turnSpeed = 10f;
 	public KeyCode sprintJoystick = KeyCode.JoystickButton2;
 	public KeyCode sprintKeyboard = KeyCode.LeftShift;
-	public float speedMult = 1.0f;
+	public float speedMult = 2.0f;
 	private float turnSpeedMultiplier;
 	private float forwardVelocity = 0f;
 	private float direction = 0f;
 	private bool isSprinting = false;
-	private Animator anim;
 	private Vector3 targetDirection;
 	private Vector2 input;
 	private Quaternion freeRotation;
-	private Camera mainCamera;
 	//private float forwardVelocity;
+	public Vector3 gravity;
+	[SerializeField] private Vector3 velocity;
 
-	// Use this for initialization
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
 		anim = GetComponent<Animator> ();
 		mainCamera = Camera.main;
 	}
 
-	private void LateUpdate() {
-		transform.position += (anim.deltaPosition);
+	private void Update () {
+		if (characterController.isGrounded) {
+			velocity.y = 0;
+		}
+		if (Input.GetButtonDown ("Jump") && characterController.isGrounded) {
+			Debug.Log ("Jump");
+			anim.SetBool ("Jump", true);
+			velocity.y = jumpForce;
+		} else {
+			anim.SetBool ("Jump", false);
+		}
+		anim.SetFloat ("Vertical", velocity.y);
 	}
 
-	// Update is called once per frame
-	void FixedUpdate () {
+	private void LateUpdate () {
 
+		//transform.position += (anim.deltaPosition);
+		//characterController.Move (anim.deltaPosition);
+
+	}
+
+	//Add Jumping
+	//Add CharacterController
+	void FixedUpdate () {
 		input.x = Input.GetAxis ("Horizontal");
 		input.y = Input.GetAxis ("Vertical");
 
+		velocity += Physics.gravity * Time.deltaTime;
+
 		// set speed to both vertical and horizontal inputs
 		forwardVelocity = Mathf.Abs (input.x) + Mathf.Abs (input.y);
-
 		forwardVelocity = Mathf.Clamp (forwardVelocity, 0f, 1f);
 		//speed = Mathf.SmoothDamp (anim.GetFloat ("Speed"), speed, ref velocity, 0.1f);
 		anim.SetFloat ("Speed", forwardVelocity);
 
-		//if (input.y < 0f && keepDirection) direction = input.y;
 		direction = 0f;
 		anim.SetFloat ("Direction", direction);
 
 		// set sprinting
-		if ((Input.GetKeyDown (sprintJoystick) || Input.GetKeyDown (sprintKeyboard)) && input != Vector2.zero && direction >= 0f) isSprinting = true;
-		if ((Input.GetKeyUp (sprintJoystick) || Input.GetKeyUp (sprintKeyboard)) || input == Vector2.zero) isSprinting = false;
-		anim.SetBool ("isSprinting", isSprinting);
+		//if ((Input.GetKeyDown (sprintJoystick) || Input.GetKeyDown (sprintKeyboard)) && input != Vector2.zero && direction >= 0f) isSprinting = true;
+		//if ((Input.GetKeyUp (sprintJoystick) || Input.GetKeyUp (sprintKeyboard)) || input == Vector2.zero) isSprinting = false;
+		//anim.SetBool ("isSprinting", isSprinting);
+		if (Input.GetKey (sprintKeyboard)) {
+			anim.SetFloat ("Sprint", speedMult);
+		} else {
+			anim.SetFloat ("Sprint", 1.0f);
+		}
 
 		// Update target direction relative to the camera view (or not if the Keep Direction option is checked)
 		UpdateTargetDirection ();
@@ -64,6 +90,11 @@ public class ThirdPersonV2 : MonoBehaviour {
 
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (euler), turnSpeed * turnSpeedMultiplier * Time.deltaTime);
 		}
+		velocity += transform.forward * forwardVelocity * (Input.GetKey (sprintKeyboard) ? speedMult : 1f);
+		velocity.x -= velocity.x * friction;
+		velocity.z -= velocity.z * friction;
+
+		characterController.Move (velocity * Time.deltaTime);
 	}
 
 	public virtual void UpdateTargetDirection () {
