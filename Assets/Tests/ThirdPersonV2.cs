@@ -20,7 +20,6 @@ public class ThirdPersonV2 : MonoBehaviour {
 	private Vector2 input;
 	private Quaternion freeRotation;
 	//private float forwardVelocity;
-	public Vector3 gravity;
 	[SerializeField] private Vector3 velocity;
 
 	void Start () {
