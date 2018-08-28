@@ -6,13 +6,18 @@ public class DroneController : MonoBehaviour {
 	public Transform target;
 	public float speed;
 	private Camera mainCamera;
-	private void Start() {
+	[SerializeField] Rigidbody rb;
+	private void Start () {
 		mainCamera = Camera.main;
+		rb.useGravity = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.Lerp(transform.position,target.position,speed);
-		transform.forward = mainCamera.transform.forward;
+		
+	}
+
+	private void FixedUpdate() {
+		rb.velocity = (Vector3.Distance (target.position, transform.position) * speed) * Vector3.Lerp (rb.velocity, (target.position - transform.position).normalized, 1.0f);
 	}
 }
