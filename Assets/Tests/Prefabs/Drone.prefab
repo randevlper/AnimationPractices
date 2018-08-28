@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4742933481694442}
   - component: {fileID: 33650356326781654}
   - component: {fileID: 23736996605900978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,13 +37,29 @@ GameObject:
   m_Component:
   - component: {fileID: 4492591941537990}
   - component: {fileID: 108602418735982952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1613958045697586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4365623356017644}
+  - component: {fileID: 114144858508147108}
+  m_Layer: 9
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1624522096223152
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,13 +71,26 @@ GameObject:
   - component: {fileID: 135122109596455898}
   - component: {fileID: 114004391941796778}
   - component: {fileID: 54829941167700050}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4365623356017644
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613958045697586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.337}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4845432472861914}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4492591941537990
 Transform:
   m_ObjectHideFlags: 1
@@ -100,6 +129,7 @@ Transform:
   m_Children:
   - {fileID: 4492591941537990}
   - {fileID: 4742933481694442}
+  - {fileID: 4365623356017644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,6 +239,22 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 5
   rb: {fileID: 54829941167700050}
+--- !u!114 &114144858508147108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613958045697586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7912a1c9b631e3741a048917df5f3e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1137593084218966, guid: fad002f0c3ed91d41b4baddf1c72590e,
+    type: 2}
+  speed: 50
+  cooldown: 0.1
+  canShoot: 0
 --- !u!135 &135122109596455898
 SphereCollider:
   m_ObjectHideFlags: 1
