@@ -5,9 +5,9 @@ using UnityEngine;
 public class BulletEmmiterController : MonoBehaviour {
 	public BulletEmmiter[] emmiters;
 
-	public void ShootAll (Vector3 pos) {
+	public void ShootAll () {
 		foreach (var item in emmiters) {
-			item.Emit (pos);
+			item.Emit ();
 		}
 	}
 }

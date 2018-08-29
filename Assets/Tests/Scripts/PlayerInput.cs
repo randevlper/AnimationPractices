@@ -18,11 +18,7 @@ public class PlayerInput : MonoBehaviour {
 	RaycastHit hit;
 	void Update () {
 		if (Input.GetButton ("Fire1")) {
-			ray = mainCamera.ViewportPointToRay (new Vector3 (0.5f, 0.5f));
-			if(Physics.Raycast (ray, out hit, 100, shootMask)){
-				Debug.DrawRay(ray.origin,ray.direction,Color.red);
-				controller.ShootAll (hit.point);
-			}
+			controller.ShootAll ();
 
 			
 		}
