@@ -33,7 +33,6 @@ public class ThirdPersonV2 : MonoBehaviour {
 			velocity.y = 0;
 		}
 		if (Input.GetButtonDown ("Jump") && characterController.isGrounded) {
-			Debug.Log ("Jump");
 			anim.SetBool ("Jump", true);
 			velocity.y = jumpForce;
 		} else {

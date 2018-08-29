@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 54425775506848872}
+  damage: 10
 --- !u!136 &136971720998784796
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -148,7 +149,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137593084218966}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.06
   m_Height: 0.6
