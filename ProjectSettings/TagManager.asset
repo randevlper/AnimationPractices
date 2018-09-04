@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - 3DUI
-  - Player
-  - Bullet
-  - 
-  - 
+  - Friendly
+  - Friendly Bullet
+  - Enemy
+  - Enemy Bullet
   - 
   - 
   - 

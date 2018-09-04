@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 54425775506848872}
   damage: 10
+  life: 10
 --- !u!136 &136971720998784796
 CapsuleCollider:
   m_ObjectHideFlags: 1

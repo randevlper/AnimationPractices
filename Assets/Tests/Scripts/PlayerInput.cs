@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour {
 	[SerializeField] BulletEmmiterController controller;
+	[SerializeField] ThirdPersonV2 thirdPersonController;
 	Camera mainCamera;
 	public LayerMask shootMask;
 	public float maxRaycastDistance;
@@ -17,10 +18,10 @@ public class PlayerInput : MonoBehaviour {
 	Ray ray;
 	RaycastHit hit;
 	void Update () {
+		if(thirdPersonController.IsUnlockButtonPressed()){return;}
+
 		if (Input.GetButton ("Fire1")) {
 			controller.ShootAll ();
-
-			
 		}
 	}
 }

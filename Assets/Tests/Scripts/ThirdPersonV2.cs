@@ -29,6 +29,14 @@ public class ThirdPersonV2 : MonoBehaviour {
 	}
 
 	private void Update () {
+
+		if(IsUnlockButtonPressed()){
+			Cursor.lockState = CursorLockMode.None;
+			return;
+		} else {
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+
 		if (characterController.isGrounded) {
 			velocity.y = 0;
 		}
@@ -48,9 +56,20 @@ public class ThirdPersonV2 : MonoBehaviour {
 
 	}
 
+	public bool IsUnlockButtonPressed(){
+		if(Input.GetKey(KeyCode.LeftControl)){
+			Cursor.lockState = CursorLockMode.None;
+			return true;
+		}
+		return false;
+	}
+
 	//Add Jumping
 	//Add CharacterController
 	void FixedUpdate () {
+
+		if(IsUnlockButtonPressed()) {return;}
+
 		input.x = Input.GetAxis ("Horizontal");
 		input.y = Input.GetAxis ("Vertical");
 
