@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Unlit_SpecialFX_Liquid
+  m_Shader: {fileID: 4800000, guid: 47eb08c5bc8d8164cb9fbceccd96d7cb, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _FillAmount: 0.5
+    - _Rim: 0
+    - _RimPower: 0
+    - _WobbleX: 0
+    - _WobbleZ: 0
+    m_Colors:
+    - _FoamColor: {r: 1, g: 0.71323526, b: 0.8852942, a: 1}
+    - _RimColor: {r: 0.87535495, g: 0, b: 0.9264706, a: 1}
+    - _Tint: {r: 0.16652249, g: 0.23542845, b: 0.5661765, a: 1}
+    - _TopColor: {r: 0.9191176, g: 0.79071146, b: 0.79071146, a: 1}

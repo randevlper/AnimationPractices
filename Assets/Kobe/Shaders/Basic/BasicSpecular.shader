@@ -39,7 +39,7 @@
 
 				float4 vertexClip : SV_POSITION;
 				float4 vertexWorld : TEXCOORD1;
-				float3 worldNormal : TEXCOORD2;
+				//float3 worldNormal : TEXCOORD2;
 				half3 tspace0 : TEXCOORD3;
 				half3 tspace1 : TEXCOORD4;
 				half3 tspace2 : TEXCOORD5;
@@ -74,7 +74,7 @@
 				o.tspace2 = half3(worldTangent.z, worldBitangent.z, worldNormal.z);
 
 
-				o.worldNormal = worldNormal;
+				//o.worldNormal = worldNormal;
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
@@ -99,7 +99,7 @@
 				float3 specularDot = max(0.0, dot(viewDirection, reflectionDirection));
 				float3 specular = pow(specularDot, _Shininess);
 				float4 specularTerm = float4(specular, 1) * _SpecColor * _LightColor0;
-				
+
 				//FinalColor
 				float4 finalColor = (diffuseTerm + specularTerm);
 				return finalColor;
